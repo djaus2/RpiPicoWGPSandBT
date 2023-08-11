@@ -1,11 +1,11 @@
-# RPIPicoWGPSandBT
+# RPI Pico W GPS and Bluetooth
 
-A set of Arduino Sketches for execution on a RPI Pico W involving GPS and Bluetooth.
+A set of Arduino Sketches for execution on a RPI Pico W in building up to and including sending GPS location data over Bluetooth.
 
 ## Hardware
 
 ### Bluetooth
-The RPI PicoW comes with Bluetooth. The BSP used has been updated to include Bluetooth.
+The RPI PicoW comes with Bluetooth. The BSP used has been updated to include that.
 - The repository for the Pico W Arduino BSP: [earlephilhower-arduino-pico on Github](https://github.com/earlephilhower/arduino-pico)
 - Installation [instructions](https://davidjones.sportronics.com.au/ardpico/RPI-Pico-Arduino-AzSDK-PicoWSetup-pic-ard.html#how-to-install-arduino-bsp-onto-a-rpi-pico)
 - [Bluetooth documentation for the BSP](https://arduino-pico.readthedocs.io/en/latest/bluetooth.html)
@@ -47,7 +47,7 @@ The RPI PicoW comes with Bluetooth. The BSP used has been updated to include Blu
     - **_Note:_** Bluetooth Classic, not BLE.
     - Found the [Android phone app Serial Bluetooth Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_bluetooth_terminal) was easier to pair than desktop.
 6. BluetoothGPS
-    - <font color="blue"><bold>Send Location data over Bluetooth to paired host.</bold></font>
+    - **<font color="blue"><bold>**Send Location data over Bluetooth to paired host.**</bold></font>**
     - As per 4 but data and commands over Bluetooth _(Merger of 4. and 5.)_
     - Receives commands over BT as per **_BTSerialUppercase_** and interprets them as per **_LocationGPS_**.
       - That is, sends Location data back over BT when available as per **_LocationGPS_** _(to SerialBT instead of Serial)_ 
