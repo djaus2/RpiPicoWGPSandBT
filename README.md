@@ -40,15 +40,18 @@ The RPI PicoW comes with Bluetooth. The BSP used has been updated to include Blu
       - d: Display GPGGA string
       - l: Display as location tupple
       - t: Display as json telemetry
-5. Bluetooth Echo
+5. BTSerialUppercase
     - Receive text over Bluetooth and echo it back after upper-casing it.
     - Is the Android IDE **SerialBT** _BTSerialUppercase_ example  
     - Added echo to IDE Terminal of the characters being passed, unadulterated.
+    - **_Note:_** Bluetooth Classic, not BLE.
     - Found the [Android phone app Serial Bluetooth Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_bluetooth_terminal) was easier to pair than desktop.
 6. BluetoothGPS
+    - <font color="blue"><bold>Send Location data over Bluetooth to paired host.</bold></font>
     - As per 4 but data and commands over Bluetooth _(Merger of 4. and 5.)_
-    - Send Location data over Bluetooth to paired host.
-    - _(Coming)_
+    - Receives commands over BT as per **_BTSerialUppercase_** and interprets them as per **_LocationGPS_**.
+      - That is, sends Location data back over BT when available as per **_LocationGPS_** _(to SerialBT instead of Serial)_ 
+    - **_Note:_** Bluetooth Classic, not BLE.
   
 
 
