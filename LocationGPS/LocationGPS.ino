@@ -243,25 +243,25 @@ void loop() {
                       break;
                     case 't': // Telemetry
                       split(nmea);
-                      Serial.print("{");
-                      Serial.print("lattitude:");
+                      Serial.print("{\"geolocation\":{");
+                      Serial.print("\"lat\":");
                       if(strings[lattIndex+1]=="S")
                       {
                         Serial.print("-");
                       }
                       Serial.print(ShiftLeft2(strings[lattIndex]));
                       Serial.print(",");
-                      Serial.print("longitude:");
+                      Serial.print("\"long\":");
                       if(strings[longIndex+1]=="W")
                       {
                         Serial.print("-");
                       }
                       Serial.print(ShiftLeft2(strings[longIndex]));
                       Serial.print(",");
-                      Serial.print("elevation:");
+                      Serial.print("\"alt\":");
                       Serial.print(strings[heightIndex]);
                       Serial.print(strings[heightIndex+1]);
-                      Serial.println("}");
+                      Serial.println("}}");
                       break;
                     default:
                       break;
