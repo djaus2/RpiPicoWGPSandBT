@@ -48,6 +48,7 @@ The RPI PicoW comes with Bluetooth. The BSP used has been updated to include Blu
 6. BluetoothGPS
     - As per 4 but data and commands over Bluetooth _(Merger of 4. and 5.)_
     - Send Location data over Bluetooth to paired host.
+    - _(Coming)_
   
 
 
