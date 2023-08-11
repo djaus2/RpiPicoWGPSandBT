@@ -4,8 +4,8 @@ A set of Arduino Sketches for execution on a RPI Pico W involving GPS and Blueto
 
 ## Hardware
 
-### BlueTooth
-The RPI PicoW comes with Bluetooth. The BSP used has been updated to include BlueTooth.
+### Bluetooth
+The RPI PicoW comes with Bluetooth. The BSP used has been updated to include Bluetooth.
 - The repository for the Pico W Arduino BSP: [earlephilhower-arduino-pico on Github](https://github.com/earlephilhower/arduino-pico)
 - Installation [instructions](https://davidjones.sportronics.com.au/ardpico/RPI-Pico-Arduino-AzSDK-PicoWSetup-pic-ard.html#how-to-install-arduino-bsp-onto-a-rpi-pico)
 - [Bluetooth documentation for the BSP](https://arduino-pico.readthedocs.io/en/latest/bluetooth.html)
