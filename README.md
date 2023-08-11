@@ -32,7 +32,8 @@ The RPI PicoW comes with Bluetooth. The BSP used has been updated to include tha
       - v: Display GPGSV - Satellites in view
 4.  LocationGPS
     - Filter all messages except GPGGA
-    - Get lattitude, longitude and height
+    - Get latitude, longitude and height
+    - _Note that string processing of NMEA messages is explicit rather than using existing libraries._
     - Commands:
     - - s: start
       - p: stop
