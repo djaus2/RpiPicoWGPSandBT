@@ -45,7 +45,7 @@ The RPI PicoW comes with Bluetooth. The BSP used has been updated to include Blu
     - Is the Android IDE **SerialBT** _BTSerialUppercase_ example  
     - Added echo to IDE Terminal of the characters being passed, unadulterated.
     - Found the [Android phone app Serial Bluetooth Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_bluetooth_terminal) was easier to pair than desktop.
-6. Bluetooth and GPS
+6. BluetoothGPS
     - As per 4 but data and commands over Bluetooth _(Merger of 4. and 5.)_
     - Send Location data over Bluetooth to paired host.
   
