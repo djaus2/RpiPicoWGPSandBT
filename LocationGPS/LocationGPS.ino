@@ -3,12 +3,12 @@
 // Filter all but GPGGA
 //============================
 // Get lattitude, longitude and height
-// d: splay GPGGA string
-// l: display as location tupple
-// t: display as Json tupple
 // s: start
 // p: stop
 // n display none
+// d: splay GPGGA string
+// l: display as location tupple
+// t: display as Json tupple
 
 // Using Arduino Compatible GPS Receiver Module Jaycar (Australia) CAT.NO:  XC3710
 // https://www.jaycar.com.au/arduino-compatible-gps-receiver-module/p/XC3710

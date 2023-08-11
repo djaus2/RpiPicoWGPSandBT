@@ -1,0 +1,50 @@
+# RPIPicoWGPSandBT
+
+A set of Arduino Sketches for execution on a RPI Pico W involving GPS and Bluetooth.
+
+## Hardware
+
+### Bluetooth
+The RPI PicoW comes with Bluetooth. The BSP used has been updated to include Bluetooth.
+- The repository for the Pico W Arduino BSP: [earlephilhower-arduino-pico on Github](https://github.com/earlephilhower/arduino-pico)
+- Installation [instructions](https://davidjones.sportronics.com.au/ardpico/RPI-Pico-Arduino-AzSDK-PicoWSetup-pic-ard.html#how-to-install-arduino-bsp-onto-a-rpi-pico)
+- [Bluetooth documentation for the BSP](https://arduino-pico.readthedocs.io/en/latest/bluetooth.html)
+
+### Arduino GPS Receiver
+  - Arduino Compatible GPS Receiver Module Jaycar (Australia) CAT.NO:  XC3710
+  - https://www.jaycar.com.au/arduino-compatible-gps-receiver-module/p/XC3710
+  - nblox NEO-7M Module  BAUD is 9600
+
+## Projects
+
+1.  USART1 Echo
+    - Echo text from **Serial terminal** _(uppercased)_ back to it after first passing it through **USART1 in loopback mode**.
+2.  Basic GPS
+    - Read and echo NMEA sentences to **Serial terminal**
+3.  IneractiveGPS
+    - Can send commands to device from **Serial terminal**:
+      - s: Start
+      - p: Stop
+      - n: No filter on messages
+      - n: Filter all _(none displayed)_
+      - a: Display GPGGA - Global Positioning System Fix Data
+      - l: Display GPGLL - Geographic Position, Latitude / Longitude
+      - v: Display GPGSV - Satellites in view
+4.  LocationGPS
+    - Filter all messages except GPGGA
+    - Get lattitude, longitude and height
+    - Commands:
+    - - s: start
+      - p: stop
+      - n display none
+      - d: Display GPGGA string
+      - l: Display as location tupple
+      - t: Display as json telemetry
+5. Bluetooth Echo
+    - Receive text over Bluetooth and echo it back after uppercasing it _(coming)_
+6. Bluetooth and GPS
+    - As per 4 but data and commands ober Bluetooth _(coming)_
+  
+
+
+
