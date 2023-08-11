@@ -19,9 +19,9 @@ The RPI PicoW comes with Bluetooth. The BSP used has been updated to include Blu
 
 1.  USART1 Echo
     - Echo text from **Serial terminal** _(uppercased)_ back to it after first passing it through **USART1 in loopback mode**.
-3.  Basic GPS
+2.  Basic GPS
     - Read and echo NMEA sentences to **Serial terminal**
-5.  IneractiveGPS
+3.  IneractiveGPS
     - Can send commands to device from **Serial terminal**:
       - s: Start
       - p: Stop
@@ -30,7 +30,7 @@ The RPI PicoW comes with Bluetooth. The BSP used has been updated to include Blu
       - a: Display GPGGA - Global Positioning System Fix Data
       - l: Display GPGLL - Geographic Position, Latitude / Longitude
       - v: Display GPGSV - Satellites in view
-5.  LocationGPS
+4.  LocationGPS
     - Filter all messages except GPGGA
     - Get lattitude, longitude and height
     - Commands:
@@ -40,6 +40,11 @@ The RPI PicoW comes with Bluetooth. The BSP used has been updated to include Blu
       - d: Display GPGGA string
       - l: Display as location tupple
       - t: Display as json telemetry
+5. Bluetooth Echo
+    - Receive text over Bluetooth and echo it back after uppercasing it _(coming)_
+6. Bluetooth and GPS
+    - As per 4 but data and commands ober Bluetooth _(coming)_
+  
 
 
 
