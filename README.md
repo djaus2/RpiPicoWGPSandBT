@@ -1,6 +1,6 @@
 # RPI Pico W GPS and Bluetooth
 
-A set of Arduino Sketches for execution on a RPI Pico W in building up to and including sending GPS location data over Bluetooth.
+A set of Arduino Sketches for execution on a RPI Pico W  building up to and including sending GPS location data over Bluetooth in BT Classic mode.
 
 ## Hardware
 
