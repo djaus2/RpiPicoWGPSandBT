@@ -2,6 +2,18 @@
 
 A set of Arduino Sketches for execution on a RPI Pico W involving GPS and Bluetooth
 
+## Hardware
+
+### BlueTooth
+The RPI PicoW comes with Bluetooth. The BSP used has been updated to include BlueTooth.
+- The repository for the Pico W Arduino BSP: [earlephilhower-arduino-pico on Github](https://github.com/earlephilhower/arduino-pico)
+- Installation [instructions](https://davidjones.sportronics.com.au/ardpico/RPI-Pico-Arduino-AzSDK-PicoWSetup-pic-ard.html#how-to-install-arduino-bsp-onto-a-rpi-pico)
+
+### Arduino GPS Receiver
+  - Arduino Compatible GPS Receiver Module Jaycar (Australia) CAT.NO:  XC3710
+  - https://www.jaycar.com.au/arduino-compatible-gps-receiver-module/p/XC3710
+  - nblox NEO-7M Module  BAUD is 9600
+
 ## Projects
 
 1.  USART1 Echo
