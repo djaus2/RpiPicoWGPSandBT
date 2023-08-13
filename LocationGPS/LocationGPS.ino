@@ -35,7 +35,7 @@ bool done=false;
 char mode ='a';
 char nmea[128];
 int indx=0;
-bool starting = true;
+bool starting = true;F
 
 // Locations in GPGGA of entities
 #define lattIndex 2

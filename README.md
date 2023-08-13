@@ -53,6 +53,9 @@ The RPI PicoW comes with Bluetooth. The BSP used has been updated to include tha
     - Receives commands over BT as per **_BTSerialUppercase_** and interprets them as per **_LocationGPS_**.
       - That is, sends Location data back over BT when available as per **_LocationGPS_** _(to SerialBT instead of Serial)_ 
     - **_Note:_** Bluetooth Classic, not BLE.
+7. Azure_IoT_Hub_GPS
+    - Send GPS location data, generated as per BlueToothGPS, as Telemetry to an Azure IoT Hub
+    - NOT YET TESTED.
   
 
 
