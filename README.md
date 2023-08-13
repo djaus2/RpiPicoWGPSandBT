@@ -21,7 +21,7 @@ The RPI PicoW comes with Bluetooth. The BSP used has been updated to include tha
     - Echo text from **Serial terminal** _(uppercased)_ back to it after first passing it through **USART1 in loopback mode**.
 2.  Basic GPS
     - Read and echo NMEA sentences to **Serial terminal**
-3.  IneractiveGPS
+3.  InteractiveGPS
     - Can send commands to device from **Serial terminal**:
       - s: Start
       - p: Stop
@@ -54,7 +54,7 @@ The RPI PicoW comes with Bluetooth. The BSP used has been updated to include tha
       - That is, sends Location data back over BT when available as per **_LocationGPS_** _(to SerialBT instead of Serial)_ 
     - **_Note:_** Bluetooth Classic, not BLE.
 7. Azure_IoT_Hub_GPS
-    - Send GPS location data, generated as per BlueToothGPS, as Telemetry to an Azure IoT Hub
+    - Send GPS location data, generated as per **LocationGPS**, as Telemetry to an Azure IoT Hub
     - NOT YET TESTED.
   
 
