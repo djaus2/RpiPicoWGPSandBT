@@ -71,13 +71,13 @@ The RPI PicoW comes with Bluetooth. The BSP used has been updated to include tha
 
   - Send GPS location data, generated as per **LocationGPS**, as Telemetry to an Azure IoT Hub. 
     - _Minus interactive commands._
-  - Filter all messages except GPGGA
+  - Filter all messages except **GPGGA**
 Get latitude, longitude and height
   - From **LocationGPS** uses json location option.
       - That is, all creation of the telemetry string explicitly uses string processing rather than GPS and json classes.
   - Now works.
 
-8. read-d2c-messages
+8. **read-d2c-messages**
 
   - .NET Console app to monitor messages sent to IoT Hub by 7.
   - See code for connection details.
