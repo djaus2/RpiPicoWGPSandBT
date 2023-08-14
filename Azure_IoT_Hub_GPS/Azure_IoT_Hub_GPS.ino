@@ -427,6 +427,7 @@ void GPSsetup();
 
 void setup()
 {
+  Serial.println("1");
   Serial.begin(115200);
   while(!Serial){}	
   pinMode(LED_BUILTIN, OUTPUT);
@@ -541,32 +542,39 @@ void GPSsetup() {
   Serial2.setTX(TXD2);
   Serial2.begin(9600);
   delay(1000);
+  while(!Serial2){};
+  Serial.println("GPS is Setup");
 }
 
-String GetGPS()
-{
-  String json="";
+
+String result="";
+void GetGPS()
+{ 
+  result ="";
+  String location = "";
+  String json = "";
+  bool done =false;
+  bool starting=true;
   if (Serial2.available()) 
   {
-    while((Serial2.available()) &&(!done))
+    while(!done)
     {
+      while (!Serial2.available()){}
       char c1 = Serial2.read();
       if(starting)
       {
-        if(c1=='$')
+        // Wait for start of a NMEA sentence
+        while(c1 != '$' )
         {
-          json ="";
-          starting=false;
-          indx=0;
-          done=false;
-          nmea[indx]=c1;
-          indx++;
-          continue;
+          while (!Serial2.available()){}
+          c1 = Serial2.read();
         }
-        else
-        {
-          continue;
-        }
+        starting=false;
+        indx=0;
+        done=false;
+        nmea[indx]=c1;
+        indx++;
+        continue;
       }
       else if (c1=='\n')
       {
@@ -585,6 +593,7 @@ String GetGPS()
         if(indx>128)
         {
           Serial.println("Overrun.");
+          Serial.println(nmea);
           indx=0;
           done=false;
           nmea[0]=0;
@@ -609,53 +618,57 @@ String GetGPS()
               {
                 // Telemetry
                 split(nmea);
-                json += "{\"geolocation\":{";
+                json = "{\"geolocation\":{";
                 json += "\"lat\":";
                 if(strings[lattIndex+1]=="S")
                 {
-                  json +="-";
+                  json += "-";
                 }
                 json += ShiftLeft2(strings[lattIndex]);
-                json +=",";
-                json +="\"long\":";
+                json += ",";
+                json += "\"lon\":";
                 if(strings[longIndex+1]=="W")
                 {
-                  json +="-";
+                  json += "-";
                 }
-                json +=ShiftLeft2(strings[longIndex]);
-                json +=",";
-                json +="\"alt\":";
-                json +=strings[heightIndex];
-                Serial.print(strings[heightIndex+1]);
-                json +="}}";
+                json += ShiftLeft2(strings[longIndex]);
+                json += ",";
+                json += "\"alt\":";
+                json += strings[heightIndex];
+                //json += strings[heightIndex+1];
+                json += "}}";
+                result =  json;
               }
             }
           }
         }
       }
-      starting=true;
-      done=false;
     }
   }
-  return json;
 }
 
 void loop()
 {
-  String json = GetGPS();
-  if (millis() > next_telemetry_send_time_ms)
+  GetGPS();
+  if (result.length()> 0)
   {
-    // Check if connected, reconnect if needed.
-    if (!mqtt_client.connected())
+    Serial.println(result);
+    String json = result;
+
+    if (millis() > next_telemetry_send_time_ms)
     {
-      establishConnection();
+      // Check if connected, reconnect if needed.
+      if (!mqtt_client.connected())
+      {
+        establishConnection();
+      }
+      Serial.println("2.5");
+      sendTelemetry(json);
+      next_telemetry_send_time_ms = millis() + TELEMETRY_FREQUENCY_MILLISECS;
     }
-
-    sendTelemetry(json);
-    next_telemetry_send_time_ms = millis() + TELEMETRY_FREQUENCY_MILLISECS;
+    //Serial.println("3");
+    // MQTT loop must be called to process Device-to-Cloud and Cloud-to-Device.
+    mqtt_client.loop();
+    delay(500);
   }
-
-  // MQTT loop must be called to process Device-to-Cloud and Cloud-to-Device.
-  mqtt_client.loop();
-  delay(500);
 }

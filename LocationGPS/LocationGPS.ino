@@ -31,11 +31,10 @@
 // RPI Pico has has 2 USART, USART0 is Serial/Serial1/USB
 
 bool run = true;
-bool done=false;
 char mode ='a';
 char nmea[128];
 int indx=0;
-bool starting = true;F
+bool starting = true;
 
 // Locations in GPGGA of entities
 #define lattIndex 2
@@ -46,7 +45,6 @@ void setup() {
   run = true;
   mode ='d';
   indx=0;
-  done=false;
   starting=true;
   nmea[0]=0;
   Serial2.setRX(RXD2);  
@@ -106,6 +104,131 @@ String ShiftLeft2(String num)
   return "Error";
 }
 
+String result="";
+void GetNMEASentence()
+{ 
+  result ="";
+  String location = "";
+  String json = "";
+  bool done =false;
+  bool starting=true;
+  if (Serial2.available()) 
+  {
+    while(!done)
+    {
+      while (!Serial2.available()){}
+      char c1 = Serial2.read();
+      if(starting)
+      {
+        // Wait for start of a NMEA sentence
+        while(c1 != '$' )
+        {
+          while (!Serial2.available()){}
+          c1 = Serial2.read();
+        }
+        starting=false;
+        indx=0;
+        done=false;
+        nmea[indx]=c1;
+        indx++;
+        continue;
+      }
+      else if (c1=='\n')
+      {
+        done = true;
+        break;
+      }
+      else if (c1=='\r')
+      {
+        done = true;
+        break;
+      }
+      else
+      {
+        nmea[indx]=c1;
+        indx++;
+        if(indx>128)
+        {
+          Serial.println("Overrun.");
+          Serial.println(nmea);
+          indx=0;
+          done=false;
+          nmea[0]=0;
+          break;
+        }
+        nmea[indx]=0;
+      }
+    } 
+    if (done)
+    {
+      // Expect starting with GP
+      if(nmea[1]=='G')
+      {
+        if(nmea[2]=='P')
+        {
+          // $GPGGA
+          if(nmea[5]=='A')
+          {
+            if(nmea[4]=='G')
+            {
+              if(nmea[3]=='G')
+              {
+                switch (mode)
+                {
+                  case 'd':
+                    result = nmea;
+                    break;
+                  case 'n':
+                    break;
+                  case 'l': // Location
+                    split(nmea);
+                    location  = "(";
+                    location += ShiftLeft2(strings[lattIndex]);
+                    location += strings[lattIndex+1];
+                    location += ",";
+                    location += ShiftLeft2(strings[longIndex]);
+                    location += strings[longIndex+1];
+                    location += ",";
+                    location += strings[heightIndex];
+                    location += strings[heightIndex+1];
+                    location += ")";
+                    result = location;
+                    break;
+                  case 't': // Telemetry
+                    split(nmea);
+                    json = "{\"geolocation\":{";
+                    json += "\"lat\":";
+                    if(strings[lattIndex+1]=="S")
+                    {
+                      json += "-";
+                    }
+                    json += ShiftLeft2(strings[lattIndex]);
+                    json += ",";
+                    json += "\"lon\":";
+                    if(strings[longIndex+1]=="W")
+                    {
+                      json += "-";
+                    }
+                    json += ShiftLeft2(strings[longIndex]);
+                    json += ",";
+                    json += "\"alt\":";
+                    json += strings[heightIndex];
+                    //json += strings[heightIndex+1];
+                    json += "}}";
+                    result =  json;
+                    break;
+                  default:
+                    break;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 
 void loop() {
 
@@ -118,9 +241,6 @@ void loop() {
     {
       case 's':
         run= true;
-        indx=0;
-        done=false;
-        starting = true;
         Serial.println("Start");
         nmea[0]=0;
         break;
@@ -133,7 +253,7 @@ void loop() {
       case '\r':
         break;
       default:
-        char prevMode = mode;
+        char prev_Mode = mode;
         mode=cmd;
         Serial.print("Mode: ");
         switch (mode)
@@ -152,7 +272,7 @@ void loop() {
             break;
           default:
             Serial.println();
-            mode=prevMode;
+            mode=prev_Mode;
             break;
         }
         break;
@@ -161,119 +281,10 @@ void loop() {
 
   if(run)
   {
-    if (Serial2.available()) 
-    {
-      while((Serial2.available()) &&(!done))
-      {
-        char c1 = Serial2.read();
-        if(starting)
-        {
-          if(c1=='$')
-          {
-            starting=false;
-            indx=0;
-            done=false;
-            nmea[indx]=c1;
-            indx++;
-            continue;
-          }
-          else
-          {
-            continue;
-          }
-        }
-        else if (c1=='\n')
-        {
-          done = true;
-          break;
-        }
-        else if (c1=='\r')
-        {
-          done = true;
-          break;
-        }
-        else
-        {
-          nmea[indx]=c1;
-          indx++;
-          if(indx>128)
-          {
-            Serial.println("Overrun.");
-            indx=0;
-            done=false;
-            nmea[0]=0;
-            break;
-          }
-          nmea[indx]=0;
-        }
-      } 
-      if (done)
-      {
-        // Expect starting with GP
-        if(nmea[1]=='G')
-        {
-          if(nmea[2]=='P')
-          {
-            // $GPGGA
-            if(nmea[5]=='A')
-            {
-              if(nmea[4]=='G')
-              {
-                if(nmea[3]=='G')
-                {
-                  switch (mode)
-                  {
-                    case 'd':
-                      Serial.println(nmea);
-                      break;
-                    case 'n':
-                      break;
-                    case 'l': // Location
-                      split(nmea);
-                      Serial.print("(");
-                      Serial.print(ShiftLeft2(strings[lattIndex]));
-                      Serial.print(strings[lattIndex+1]);
-                      Serial.print(",");
-                      Serial.print(ShiftLeft2(strings[longIndex]));
-                      Serial.print(strings[longIndex+1]);
-                      Serial.print(",");
-                      Serial.print(strings[heightIndex]);
-                      Serial.print(strings[heightIndex+1]);
-                      Serial.println(")");
-                      break;
-                    case 't': // Telemetry
-                      split(nmea);
-                      Serial.print("{\"geolocation\":{");
-                      Serial.print("\"lat\":");
-                      if(strings[lattIndex+1]=="S")
-                      {
-                        Serial.print("-");
-                      }
-                      Serial.print(ShiftLeft2(strings[lattIndex]));
-                      Serial.print(",");
-                      Serial.print("\"long\":");
-                      if(strings[longIndex+1]=="W")
-                      {
-                        Serial.print("-");
-                      }
-                      Serial.print(ShiftLeft2(strings[longIndex]));
-                      Serial.print(",");
-                      Serial.print("\"alt\":");
-                      Serial.print(strings[heightIndex]);
-                      Serial.print(strings[heightIndex+1]);
-                      Serial.println("}}");
-                      break;
-                    default:
-                      break;
-                  }
-                }
-              }
-            }
-          }
-        }
-        starting=true;
-        done=false;
-      }
-    }
+    GetNMEASentence();
+    if (result.length() >0)
+      Serial.println(result);
   }
 }
+
+
