@@ -1,6 +1,6 @@
 # RPI Pico W GPS and Bluetooth
 
-A set of Arduino Sketches for execution on a RPI Pico W  building up to and including sending GPS location data over Bluetooth in BT Classic mode.
+A set of Arduino Sketches for execution on a RPI Pico W  building up to and including sending GPS location data over Bluetooth in BT Classic mode. Also send GPS data to an Azure IoT Hub.
 
 ## Hardware
 
@@ -76,6 +76,13 @@ Get latitude, longitude and height
   - From **LocationGPS** uses json location option.
       - That is, all creation of the telemetry string explicitly uses string processing rather than GPS and json classes.
   - Now works.
+
+8. read-d2c-messages
+
+  - .NET Console app to monitor messages sent to IoT Hub by 7.
+  - See code for connection details.
+  
+  > Nb: Was found that in **Azure IoT Explorer**, needed to paste same connection string as the Custom Endpoint for the device. Built-in [Yes] option did not work.
   
 
 
