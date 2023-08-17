@@ -4,7 +4,7 @@ A set of Arduino Sketches for execution on a RPI Pico W  building up to and incl
 
 ## Blog Post
 
-[RPI-Pico-Arduino-AzSDK: Bluetooth and GPS Update](https://djzblogaccname137.z26.web.core.windows.net/ardpico/RPI-Pico-Arduino-AzSDK-BlueTooth_Setup_Update-ardpico.html)
+[RPI-Pico-Arduino-AzSDK: Bluetooth and GPS Update](https://davidjones.sportronics.com.au/ardpico/RPI-Pico-Arduino-AzSDK-BlueTooth_Setup_Update-ardpico.html)
 
 ## Hardware
 
