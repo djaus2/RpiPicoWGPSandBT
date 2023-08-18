@@ -80,10 +80,15 @@ Get latitude, longitude and height
 8. **read-d2c-messages**
 
   - .NET Console app to monitor messages sent to IoT Hub by 7.
+  - Uses .NET Core 3.1
   - See code for connection details.
   
   > Nb: Was found that in **Azure IoT Explorer**, needed to paste same connection string as the Custom Endpoint for the device. Built-in [Yes] option did not work.
   
+9. **read-d2c-messages-Net6**
 
+  - As per 8. but uses .NET 6.0
+  - See code for connection details.
+  
 
 

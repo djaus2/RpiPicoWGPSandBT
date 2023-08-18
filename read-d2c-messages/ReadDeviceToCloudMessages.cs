@@ -1,10 +1,4 @@
-﻿// Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-
-// This application uses the Microsoft Azure Event Hubs Client for .NET
-// For samples see: https://github.com/Azure/azure-event-hubs/tree/master/samples/DotNet
-// For documenation see: https://docs.microsoft.com/azure/event-hubs/
-using System;
+﻿using System;
 using Microsoft.Azure.EventHubs;
 using System.Threading.Tasks;
 using System.Threading;
@@ -19,7 +13,7 @@ namespace read_d2c_messages
         // Copy the Event Hub compatible endpoint as the connection string here.
         private static string connectionString = "<EndPoint>";
         
-        private static bool show_system_properties = true;
+        private static bool show_system_properties = false;
             
         private static EventHubClient s_eventHubClient;
 
@@ -66,14 +60,15 @@ namespace read_d2c_messages
 
         private static async Task Main(string[] args)
         {
-
-
-            Console.WriteLine("Do you want to Hide System Properties sent by IoT Hub? [Y]es Default No");
+            Console.WriteLine("IoT Hub  - Read device to cloud messages. Ctrl-C to exit.\n");
+            Console.WriteLine(".NET 6.0 C# 9.0.\n");
+            Console.WriteLine("Do you want to SHOW System Properties sent by IoT Hub? [Y]es Default No");
             var ch = Console.ReadKey();
             if ((ch.KeyChar=='Y')|| (ch.KeyChar=='y'))
             {
-                show_system_properties = false;
+                show_system_properties = true;
             }
+            Console.WriteLine();
 
 
             Console.WriteLine("Press Enter to continue when the Device is sending messages.");

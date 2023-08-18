@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = read-d2c-messages
+build_property.ProjectDir = c:\Users\david\Documents\Arduino\RPIPicoWGPSandBT\read-d2c-messages\
