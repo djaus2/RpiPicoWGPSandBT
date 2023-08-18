@@ -2,6 +2,10 @@
 
 A set of Arduino Sketches for execution on a RPI Pico W  building up to and including sending GPS location data over Bluetooth in BT Classic mode. Also send GPS data to an Azure IoT Hub.
 
+## Blog Post
+
+[RPI-Pico-Arduino-AzSDK: Bluetooth and GPS Update](https://davidjones.sportronics.com.au/ardpico/RPI-Pico-Arduino-AzSDK-BlueTooth_Setup_Update-ardpico.html)
+
 ## Hardware
 
 ### Bluetooth
