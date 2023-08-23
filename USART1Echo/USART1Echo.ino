@@ -10,13 +10,18 @@ void setup() {
   Serial2.begin(9600);
   Serial.begin(9600);
   delay(1000);
+  while(!Serial){};
+  Serial.println("Started 1");
+  while(!Serial2){};
+  Serial.println("Started 2");
 }
 
 void loop() {
   if (Serial.available()) 
   {
-    Serial2.write(Serial.read();
-  
+    
+    Serial2.write(Serial.read());
+  /*
     if (!Serial2.available()) 
     {
     }
@@ -24,6 +29,20 @@ void loop() {
     {
       char c1 = Serial2.read(); 
       Serial.write(c1);
-    };
+    };*/
+  }
+  if (Serial2.available()) 
+  {
+    
+    Serial.write(Serial2.read());
+  /*
+    if (!Serial2.available()) 
+    {
+    }
+    while(Serial2.available()) 
+    {
+      char c1 = Serial2.read(); 
+      Serial.write(c1);
+    };*/
   }
 }

@@ -51,7 +51,9 @@ void setup() {
   Serial2.setTX(TXD2);
   Serial2.begin(9600);
   Serial.begin(9600);
+  while(!Serial);
   delay(1000);
+  while(!Serial2);
 }
 
 #define bufferIndexMax  12
@@ -85,8 +87,8 @@ void split(String string)
   }
 }
 
-// NMEA latt,long values ar 100x so just shift decimal point left 2 in the string
-// Could convert to double then divide by 100 but want as string
+// THE FOLLOWING HAS BEEN UPDATED (CORRECTED):
+//See https://davidjones.sportronics.com.au/web/GPS-NMEA_101-web.html
 String ShiftLeft2(String num)
 {
   for (int i = 0; i < num.length(); ++i)
@@ -95,10 +97,15 @@ String ShiftLeft2(String num)
     
     if (c == '.')
     {
-        num[i] = num[i-1];
-        num[i-1] =num[i-2];
-        num[i-2] = '.';
-        return num;
+        String degrees = num.substring(0,i-2);
+        double deg = degrees.toDouble();
+        String part = num.substring(i-2);
+        double dPart = part.toDouble();
+        double sixty = 60.0;
+        dPart = dPart /sixty;
+        deg += dPart;
+        String degrees2 = String(deg,7);
+        return degrees2;
     }
   }
   return "Error";
@@ -281,9 +288,11 @@ void loop() {
 
   if(run)
   {
-    GetNMEASentence();
+    GetNMEASentence();;
     if (result.length() >0)
+    {
       Serial.println(result);
+    }
   }
 }
 
