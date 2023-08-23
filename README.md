@@ -93,6 +93,12 @@ Get latitude, longitude and height
 
   - As per 8. but uses .NET 6.0
   - See code for connection details.
+
+<hr />
+
+## Footnote
+
+Working on a Blazor app to display the GPS coordinates sent by 8. on a map.
   
 
 
