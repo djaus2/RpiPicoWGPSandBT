@@ -2,6 +2,14 @@
 
 A set of Arduino Sketches for execution on a RPI Pico W  building up to and including sending GPS location data over Bluetooth in BT Classic mode. Also send GPS data to an Azure IoT Hub.
 
+<hr/>
+
+### Update/Correction
+
+> The calculation of Latitude and Longitude from NMEA data has been corrected ina a number of projects as per my blog post :[GPS: NMEA 101](https://davidjones.sportronics.com.au/web/GPS-NMEA_101-web.html).
+
+<hr/>
+
 ## Blog Post
 
 [RPI-Pico-Arduino-AzSDK: Bluetooth and GPS Update](https://davidjones.sportronics.com.au/ardpico/RPI-Pico-Arduino-AzSDK-BlueTooth_Setup_Update-ardpico.html)
