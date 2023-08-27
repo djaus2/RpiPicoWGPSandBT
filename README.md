@@ -107,6 +107,7 @@ Get latitude, longitude and height
 ## Footnote
 
 Working on a Blazor app to display the GPS coordinates sent by 8. on a map.
+See [](https://github.com/djaus2/GPSMapIoTHub)
   
 
 
