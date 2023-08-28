@@ -1,4 +1,4 @@
-# RPI Pico W GPS and Bluetooth
+# RPI Pico W GPS Bluetooth and Azure IoT Hub
 
 A set of Arduino Sketches for execution on a RPI Pico W  building up to and including sending GPS location data over Bluetooth in BT Classic mode. Also send GPS data to an Azure IoT Hub.
 
